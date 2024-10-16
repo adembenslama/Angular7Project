@@ -10,8 +10,8 @@
     <td>{{pc.prixPc}}</td>
     <td>{{pc.dateCreation   | date:'dd/MM/yyyy'}}</td>
     <td>{{pc.marquePc?.nomMarque}}</td>
-    <td><a class="btn btn-danger" (click)="supprimerProduit(pc)">Supprimer</a></td>
-    <td><a class="btn btn-success" [routerLink]="['/update',pc.idPc]">Modifier</a></td>
+    <td><a  *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="supprimerProduit(pc)">Supprimer</a></td>
+    <td><a  *ngIf="authService.isAdmin()" class="btn btn-success" [routerLink]="['/update',pc.idPc]">Modifier</a></td>
     
 
     </tr>

@@ -3,6 +3,7 @@ import { Pc } from '../model/pc.model';
 import { PcService } from '../services/pc.service';
 import { Router } from '@angular/router';
 import { Marque } from '../model/marque.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-add-ordinateur',
@@ -26,10 +27,14 @@ console.log(this.newPc)
  
 
     }
-    constructor(private pcService : PcService , private router : Router){
+    constructor(private pcService : PcService , private router : Router , private auth : AuthService){
 
     }
   ngOnInit(): void {
+    if (this.auth.isAdmin() ==false)
+    {
+      this.router.navigate(['app-forbidden']);
+    }
     this.pcService.listeMarques().
     subscribe(marqs => {this.marque = marqs;
     });

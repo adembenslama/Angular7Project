@@ -13,6 +13,8 @@ import { RechercheParMarqueComponent } from './recherche-par-marque/recherche-pa
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
 import { ListeMarquesComponent } from './liste-marques/liste-marques.component';
 import { UpdateMarqueComponent } from './update-marque/update-marque.component';
+import { LoginComponent } from './login/login.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 
 
@@ -25,7 +27,9 @@ import { UpdateMarqueComponent } from './update-marque/update-marque.component';
     RechercheParMarqueComponent,
     RechercheParNomComponent,
     ListeMarquesComponent,
-    UpdateMarqueComponent
+    UpdateMarqueComponent,
+    LoginComponent,
+    ForbiddenComponent
   
 
 

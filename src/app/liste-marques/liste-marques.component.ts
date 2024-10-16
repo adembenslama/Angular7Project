@@ -12,7 +12,7 @@ export class ListeMarquesComponent implements OnInit {
 ajout:boolean=true;
 
   marques! : Marque[];
-  updatedMarq:Marque = {"idMarque":0,"nomMarque":"" , "descritionMarque"  : ""};
+  updatedMarq:Marque = {"idMarque":0,"nomMarque":"" , "descriptionMarque"  : ""};
 
   constructor(private pcService : PcService) { }
   ngOnInit(): void {

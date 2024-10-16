@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pc } from '../model/pc.model';
 import { PcService } from '../services/pc.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-ordinateurs',
@@ -9,7 +10,7 @@ import { PcService } from '../services/pc.service';
 })
 export class OrdinateursComponent implements OnInit {
   ordinateurs! : Pc[] ;
-  constructor(private pcService : PcService){
+  constructor(private pcService : PcService , public authService: AuthService){
    
   }
   supprimerProduit(p: Pc)

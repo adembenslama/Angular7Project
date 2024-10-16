@@ -7,13 +7,13 @@
     <div class="card-body">
     <table class="table table-striped">
     <thead>
-    <tr> <th>Id</th><th>Nom Marque</th><th>descrition Marque</th> </tr>
+    <tr> <th>Id</th><th>Nom Marque</th> </tr>
     </thead>
     <tbody *ngFor="let mar of marques">
     <tr>
     <td>{{mar.idMarque}}</td>
     <td>{{mar.nomMarque}}</td>
-    <td>{{mar.descritionMarque}}</td>
+    <!-- <td>{{mar.descriptionMarque}}</td> -->
     <td><a class="btn btn-success" (click)="updateMarq(mar)">Editer</a></td>
 
     </tr>
