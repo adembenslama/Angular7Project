@@ -15,18 +15,24 @@ export class AddOrdinateurComponent  implements OnInit{
   marque! : Marque[] ; 
 newMarque! :Marque;
   addPc(){
-    this.newMarque = this.pcService.consulterMarque(this.newIdMar); 
-    this.newPc.marque = this.newMarque ; 
-
-    this.pcService.ajouterPc(this.newPc);
+    
+    this.newPc.marquePc = this.marque.find(cat => cat.idMarque == this.newIdMar)!;
+console.log(this.newPc)
+    this.pcService.ajouterPc(this.newPc)
+    .subscribe(prod => {
+    console.log(prod);
     this.router.navigate(['Ordinateurs']);
-    console.log(this.newPc)
+    });
+ 
 
     }
     constructor(private pcService : PcService , private router : Router){
 
     }
   ngOnInit(): void {
-    this.marque = this.pcService.listeMarques();
+    this.pcService.listeMarques().
+    subscribe(marqs => {this.marque = marqs;
+    });
+    console.log(this.marque)
   }
 }

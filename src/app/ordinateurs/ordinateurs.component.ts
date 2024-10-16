@@ -8,19 +8,31 @@ import { PcService } from '../services/pc.service';
   styleUrls: ['./ordinateurs.component.css']
 })
 export class OrdinateursComponent implements OnInit {
-  ordinateurs : Pc[] ;
+  ordinateurs! : Pc[] ;
   constructor(private pcService : PcService){
-    this.ordinateurs = pcService.listePcs() ;
+   
   }
   supprimerProduit(p: Pc)
 {
   let conf = confirm("Etes-vous sûr ?");
  if (conf)
 
-  this.pcService.supprimerPc(p);
+  this.pcService.supprimerPc(p).subscribe(() => {
+    console.log("produit supprimé");
+    this.chargerPcs()
+    });
 
-}
+
+  }
+  chargerPcs(){
+    this.pcService.listePcs().subscribe(prods => {
+    console.log(prods);
+    this.ordinateurs = prods;
+    });
+    }
   ngOnInit(): void {
-   
+   this.pcService.listePcs().subscribe(pcs => {console.log(pcs) ; 
+    this.ordinateurs = pcs 
+   })
   }
 }

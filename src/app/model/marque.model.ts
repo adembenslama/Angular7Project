@@ -1,6 +1,6 @@
 export class Marque{
-    idMar! : number; 
-    nomMar! : string ; 
-    descritionMar! : string ;
+    idMarque! : number; 
+    nomMarque! : string ; 
+    descritionMarque! : string ;
 
 }

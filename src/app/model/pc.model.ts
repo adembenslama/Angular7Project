@@ -6,7 +6,7 @@ export class Pc {
     prixPc? : number;
      dateCreation? : Date ;
     descriptionPc? : String ;
-    marque? : Marque;
+    marquePc? : Marque;
 
     }
     

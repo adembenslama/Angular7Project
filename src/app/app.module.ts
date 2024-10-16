@@ -9,6 +9,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UpdateOrdinateurComponent } from './update-ordinateur/update-ordinateur.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RechercheParMarqueComponent } from './recherche-par-marque/recherche-par-marque.component';
+import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
+import { ListeMarquesComponent } from './liste-marques/liste-marques.component';
+import { UpdateMarqueComponent } from './update-marque/update-marque.component';
 
 
 
@@ -18,7 +22,11 @@ import { HttpClientModule } from '@angular/common/http';
     OrdinateursComponent,
     AddOrdinateurComponent,
     UpdateOrdinateurComponent,
-    
+    RechercheParMarqueComponent,
+    RechercheParNomComponent,
+    ListeMarquesComponent,
+    UpdateMarqueComponent
+  
 
 
     

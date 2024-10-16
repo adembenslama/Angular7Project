@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Pc } from '../model/pc.model';
 import { Marque } from '../model/marque.model';
-import { HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 const httpOptions = {headers: new HttpHeaders( {'Content-Type': 'application/json'} )
 };
@@ -10,45 +10,35 @@ const httpOptions = {headers: new HttpHeaders( {'Content-Type': 'application/jso
   providedIn: 'root'
 })
 export class PcService {
-  apiURL: string = 'http://localhost:8090/ordinateurs/api';
-  pcs: Pc[]; //un tableau de Pc
+  apiURL: string = 'http://localhost:8090/ordinateurs/api/pcs';
+  apiURLMar: string = 'http://localhost:8090/ordinateurs/api/marques';
+  pcs: Pc[]=[]; //un tableau de Pc
   pc!: Pc;
-  marques: Marque[];
-  constructor( ) {
-    this.marques = [{ idMar: 1, nomMar: "PC", descritionMar: "wa" },
-    { idMar: 2, nomMar: "Imprimante", descritionMar: "wa" }];
-    this.pcs = [
-      {
-        idPc: 1, nomPc: "PC Asus", prixPc: 3000.600, dateCreation
-          : new Date("01/14/2011"), marque: { idMar: 2, nomMar: "PaC", descritionMar: "wa" }
-      },
-      { idPc: 2, nomPc: "Imprimante Epson", prixPc: 450, dateCreation: new Date("12/17/2010"), marque: { idMar: 1, nomMar: "PC", descritionMar: "wa" } },
-      { idPc: 3, nomPc: "Tablette Samsung", prixPc: 900.123, dateCreation: new Date("02/20/2020"), marque: { idMar: 1, nomMar: "PC", descritionMar: "wa" } }
-    ];
+  marques: Marque[] = [];
+  constructor( private http : HttpClient) {
+    
   }
-  listePcs(): Pc[] {
-    return this.pcs;
+  listePcs(): Observable<Pc[]> {
+    return this.http.get<Pc[]>(this.apiURL);;
   }
-  ajouterPc(prod: Pc) {
-    this.pcs.push(prod);
+  ajouterPc(pc: Pc) {
+    return this.http.post<Pc>(this.apiURL, pc, httpOptions);
   }
-  listeMarques(): Marque[] {
-    return this.marques;
+  listeMarques(): Observable<Marque[]> {
+    return this.http.get<Marque[]>(this.apiURLMar);
   }
 
   consulterMarque(id: number): Marque {
-    return this.marques.find(mar => mar.idMar == id)!;
+    return this.marques.find(mar => mar.idMarque == id)!;
   }
-  consulterPc(id: number): Pc {
-    this.pc = this.pcs.find(p => p.idPc == id)!;
-    return this.pc;
+  consulterPc(id: number): Observable<Pc> {
+    const url = `${this.apiURL}/${id}`;
+    return this.http.get<Pc>(url);
   }
 
   updatePc(p: Pc) {
-    // console.log(p);
-    this.supprimerPc(p);
-    this.ajouterPc(p);
-    this.trierPcs()
+    return this.http.put<Pc>(this.apiURL + `/${p.idPc}`, p, httpOptions);
+
   }
 
   trierPcs() {
@@ -62,18 +52,23 @@ export class PcService {
       return 0;
     });
   }
+  rechercherParNom(nom: string):Observable< Pc[]> {
+    const url = `${this.apiURL}/prodsByName/${nom}`;
+    return this.http.get<Pc[]>(url);
+    }
 
+    ajouterMarque( cat: Marque):Observable<Marque>{
+      return this.http.post<Marque>(this.apiURLMar, cat, httpOptions);
+      }
+      
+    
+  rechercherParMarque(idMar: number):Observable< Pc[]> {
+    const url = `${this.apiURL}/pcsMar/${idMar}`;
+    return this.http.get<Pc[]>(url);
+    }
+    
   supprimerPc(prod: Pc) {
-    //supprimer le produit prod du tableau produits
-    const index = this.pcs.indexOf(prod, 0);
-    if (index > -1) {
-      this.pcs.splice(index, 1);
-    }
-    //ou Bien
-    /* this.produits.forEach((cur, index) => {
-    if(prod.idProduit === cur.idProduit) {
-    this.produits.splice(index, 1);
-    }
-    }); */
+    const url = `${this.apiURL}/${prod.idPc}`;
+    return this.http.delete(url, httpOptions);
   }
 }

@@ -1,4 +1,13 @@
 <div class="container">
+    <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+        <label>Nom Produit</label>
+        <input type="text" class="form-control" [(ngModel)]="nomPc" name="nomPc" class="form-control" (keydown)="rechercherPc()">
+        <button type="submit" (click)="rechercherPc()" class="btn btn-primary mb-2 ml-2">Rechercher</button>
+        </div>
+        </form>
+   
+        
     <div class="card shadow mb-4">
     <div class="card-body">
     <table class="table table-striped">
@@ -10,8 +19,7 @@
     <td>{{pc.prixPc}}</td>
     <td>{{pc.dateCreation   | date:'dd/MM/yyyy'}}</td>
     <td>{{pc.marquePc?.nomMarque}}</td>
-    <td><a class="btn btn-danger" (click)="supprimerProduit(pc)">Supprimer</a></td>
-    <td><a class="btn btn-success" [routerLink]="['/update',pc.idPc]">Modifier</a></td>
+   
     
 
     </tr>

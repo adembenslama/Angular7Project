@@ -18,21 +18,24 @@ export class UpdateOrdinateurComponent implements OnInit{
     private pcService: PcService , private router : Router) { }
     
 
-    updatePc()
-    { //console.log(this.currentProduit);
-    this.currentPc.marque = this.pcService.consulterMarque(this.updatedMarId);
-    this.pcService.updatePc(this.currentPc);
-    this.router.navigate(['']);
-
-    }
-
-  ngOnInit(): void {
-    this.marques = this.pcService.listeMarques() ;
-
-    this.currentPc = this.pcService.consulterPc(this.activatedRoute.snapshot. params['id']);
-    this.updatedMarId = this.currentPc.marque?.idMar !; 
-console.log(this.currentPc);
-
+    updatePc() {
+      this.currentPc.marquePc = this.marques.
+       find(cat => cat.idMarque == this.updatedMarId)!;
+      this.pcService.updatePc(this.currentPc).subscribe(prod => {
+      this.router.navigate(['Ordinateurs']); }
+      );
   }
+
+    ngOnInit(): void {
+      this.pcService.listeMarques().
+      subscribe(marqs => {this.marques = marqs;
+      console.log(marqs);
+      });
+      this.pcService.consulterPc(this.activatedRoute.snapshot.params['id']).
+      subscribe( prod =>{ this.currentPc = prod;
+      this.updatedMarId =
+      this.currentPc.marquePc!.idMarque;
+      } ) ;
+      }
 
 }

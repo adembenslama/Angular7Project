@@ -2,8 +2,8 @@
     <div>
     <h2>Modifier un Pc :</h2>
     </div>
-    <form >
-    <div  class="col-sm-2 col-md-2 col-lg-2">
+    <form #formRef="ngForm" (ngSubmit)="updatePc()">
+        <div  class="col-sm-2 col-md-2 col-lg-2">
     <label >ID Pc</label>
     <input readonly type="text" [(ngModel)]="currentPc.idPc"
     name="idPc" class="form-control">
@@ -25,16 +25,16 @@
  class="form-control">
 </div>
 <div class="col-sm-4 col-md-4 col-lg-4">
-    <select class="form-control form-control-lg" id="idCat" name="idCat"
+    <select class="form-control form-control-lg" id="idMarque" name="idMarque"
     [(ngModel)]="updatedMarId">
-    <option *ngFor="let cat of marques" [value]="cat.idMar" >
-    {{cat.nomMar}}
+    <option *ngFor="let cat of marques" [value]="cat.idMarque" >
+    {{cat.nomMarque}}
     </option>
     </select>
     </div>
     
 <div class="mt-2">
-<button type="submit" (click)="updatePc()" class="btn btn-success">Modifer</button>
+    <button type="submit" class="btn btn-success">Modifier</button>
 </div>
 </form>
 </div>
