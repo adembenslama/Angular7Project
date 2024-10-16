@@ -1,1 +1,22 @@
-<p>ordinateurs works!</p>
+<div class="container">
+    <div class="card shadow mb-4">
+    <div class="card-body">
+    <table class="table table-striped">
+    <tr> <th>Id</th><th>Nom</th> <th>Prix</th> <th>Date Création</th> <th>Marque</th></tr>
+    <tbody *ngFor="let pc of ordinateurs">
+    <tr >
+    <td>{{pc.idPc}}</td>
+    <td>{{pc.nomPc}}</td>
+    <td>{{pc.prixPc}}</td>
+    <td>{{pc.dateCreation   | date:'dd/MM/yyyy'}}</td>
+    <td>{{pc.marque?.nomMar}}</td>
+    <td><a class="btn btn-danger" (click)="supprimerProduit(pc)">Supprimer</a></td>
+    <td><a class="btn btn-success" [routerLink]="['/update',pc.idPc]">Modifier</a></td>
+    
+
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
